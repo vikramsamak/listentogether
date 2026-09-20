@@ -49,7 +49,7 @@ export const Queue = ({ className, ...rest }: React.ComponentProps<"div">) => {
 
   return (
     <div className={cn("", className)} {...rest}>
-      {/* <h2 className="text-xl font-bold mb-2 select-none">Beatsync</h2> */}
+      {/* <h2 className="text-xl font-bold mb-2 select-none">ListenTogether</h2> */}
       <div className="space-y-1">
         {audioSources.length > 0 ? (
           canMutate ? (

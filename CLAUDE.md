@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Beatsync is a high-precision web audio player for multi-device synchronized playback. Turborepo monorepo with three packages:
+ListenTogether is a high-precision web audio player for multi-device synchronized playback. Turborepo monorepo with three packages:
 
 - **`apps/client`**: Next.js 15 (App Router, React 19, Tailwind v4, Shadcn/ui)
 - **`apps/server`**: Bun HTTP + WebSocket server (native `Bun.serve`, not Hono routing)

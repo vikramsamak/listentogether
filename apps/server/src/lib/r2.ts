@@ -20,11 +20,13 @@ const S3_CONFIG = {
   ENDPOINT: process.env.S3_ENDPOINT!,
   ACCESS_KEY_ID: process.env.S3_ACCESS_KEY_ID!,
   SECRET_ACCESS_KEY: process.env.S3_SECRET_ACCESS_KEY!,
+  FORCE_PATH_STYLE: process.env.S3_FORCE_PATH_STYLE,
 };
 
 const r2Client = new S3Client({
   region: "auto",
   endpoint: S3_CONFIG.ENDPOINT,
+  forcePathStyle: S3_CONFIG.FORCE_PATH_STYLE === "true",
   credentials: {
     accessKeyId: S3_CONFIG.ACCESS_KEY_ID,
     secretAccessKey: S3_CONFIG.SECRET_ACCESS_KEY,
