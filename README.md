@@ -2,7 +2,7 @@
 
 ListenTogether is a high-precision web audio player built for multi-device playback. The official app is [beatsync.gg](https://www.beatsync.gg/).
 
-https://github.com/user-attachments/assets/2aa385a7-2a07-4ab5-80b1-fda553efc57b
+![ListenTogether demo](https://github.com/user-attachments/assets/2aa385a7-2a07-4ab5-80b1-fda553efc57b)
 
 ## Features
 
@@ -11,7 +11,6 @@ https://github.com/user-attachments/assets/2aa385a7-2a07-4ab5-80b1-fda553efc57b
 - **Spatial audio:** Allows controlling device volumes through a virtual listening source for interesting sonic effects
 - **Polished interface**: Smooth loading states, status indicators, and all UI elements come built-in
 - **Self-hostable**: Run your own instance with a few commands
-
 
 > [!NOTE]
 > ListenTogether is in early development. Mobile support is working, but experimental. Please consider creating an issue or contributing with a PR if you run into problems!
