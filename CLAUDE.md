@@ -64,6 +64,7 @@ The client mirrors this pattern for server→client messages: an exhaustive regi
 ### Time Synchronization
 
 NTP-inspired protocol for millisecond-accurate cross-device playback:
+
 - Client sends `NTP_REQUEST` with `t0` → server stamps `t1`/`t2` → client receives at `t3`
 - Exponential moving average smoothing (α=0.2) for RTT estimation
 - Minimum 10 measurements before "synced" state
@@ -72,6 +73,7 @@ NTP-inspired protocol for millisecond-accurate cross-device playback:
 ### Audio Pipeline
 
 Three-step upload flow (client uploads directly to R2, no server bandwidth used):
+
 1. `POST /upload/get-presigned-url` → server generates presigned R2 PUT URL
 2. Client PUTs file directly to R2
 3. `POST /upload/complete` → server adds to room's audio sources, broadcasts update
@@ -83,6 +85,7 @@ Utilities: `apps/server/src/lib/r2.ts` (presigned URLs, public URLs, batch delet
 ### Client State Management
 
 Three Zustand stores in `apps/client/src/store/`:
+
 - **`global.tsx`**: Main store (~1500 lines). Audio sources, WebSocket connection, NTP sync state, spatial audio, playback state, volume, search results, stream jobs. Uses LRU buffer cache (max 3 audio buffers).
 - **`room.tsx`**: Room metadata (roomId, username, loading state)
 - **`chat.tsx`**: Chat messages
@@ -92,6 +95,7 @@ HTTP data fetching uses Axios + TanStack React Query. WebSocket message utilitie
 ### Audio Loading Coordination
 
 When play is requested, the server doesn't immediately schedule playback. Instead:
+
 1. Server broadcasts `LOAD_AUDIO_SOURCE` to all clients
 2. Clients load/decode the audio and respond with `AUDIO_SOURCE_LOADED`
 3. Server waits for all clients (or 3s timeout) then schedules synchronized play
@@ -103,13 +107,15 @@ Grid-based positioning system where clients are placed on a grid. A "listening s
 ## Environment Setup
 
 `apps/client/.env`:
-```
+
+```env
 NEXT_PUBLIC_API_URL=http://localhost:8080
 NEXT_PUBLIC_WS_URL=ws://localhost:8080/ws
 ```
 
 `apps/server/.env`:
-```
+
+```env
 S3_BUCKET_NAME=
 S3_PUBLIC_URL=
 S3_ENDPOINT=
