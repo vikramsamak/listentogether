@@ -125,8 +125,11 @@ S3_SECRET_ACCESS_KEY=
 
 ## Deployment
 
-- **Docker**: Multi-stage build with `oven/bun:1`. Exposes port 8080. Entry: `bun start`.
-- **PM2**: Config in `pm2.config.js`. Process name: `beatsync-server`.
+Docker-only setup. Two images defined in `docker/`, both built from the repo root:
+
+- **`docker/server.Dockerfile`** → `beatsync-server` (port 8080, entry `bun dist/index.js`). Build: `bun run docker:build:server` (or `docker build -f docker/server.Dockerfile -t beatsync-server .`).
+- **`docker/client.Dockerfile`** → `beatsync-client` (port 3000, Next.js standalone output). `NEXT_PUBLIC_API_URL`/`NEXT_PUBLIC_WS_URL` are inlined at build time, so production builds must pass override build args: `--build-arg NEXT_PUBLIC_API_URL=https://api.example.com --build-arg NEXT_PUBLIC_WS_URL=wss://api.example.com/ws`.
+- Run: `bun run docker:run` (server, uses `apps/server/.env` via `--env-file`), `bun run docker:run:client` (client). `docker:stop`/`docker:clean` cover both containers.
 - Server has graceful shutdown (SIGTERM/SIGINT) that backs up state to R2 before exit.
 
 ## Development Notes
