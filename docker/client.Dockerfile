@@ -9,7 +9,9 @@ COPY package.json bun.lock ./
 COPY apps/client/package.json ./apps/client/package.json
 COPY apps/server/package.json ./apps/server/package.json
 COPY packages/shared/package.json ./packages/shared/package.json
-RUN bun install --frozen-lockfile
+# --ignore-scripts: the root prepare script runs lefthook (a devDependency that
+# spawns git, which isn't installed in the bun image) and git hooks have no place in a container
+RUN bun install --ignore-scripts --frozen-lockfile
 
 # Stage 2: Build - bundle the Next.js client (standalone output)
 FROM deps AS build
